@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-22 09:00:20.550890",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "filter_famille",
+  "client",
+  "article",
+  "order_button"
+ ],
+ "fields": [
+  {
+   "fieldname": "filter_famille",
+   "fieldtype": "HTML",
+   "label": "filter_famille",
+   "options": "<div id=\"filter-container\">\n    <label for=\"custom-famille\">Filter by Custom Famille:</label>\n    <select id=\"custom-famille\" class=\"filter-select\">\n        <option value=\"\">SOUMMAM</option>\n        <!-- Populate options dynamically using JavaScript -->\n    </select>\n</div>\n\n<style>\n#filter-container {\n    position: fixed;  /* Fixes the position to the top of the viewport */\n    top: 60px;       /* Space from the top */\n    left: 15px;      /* Space from the left */\n    right: 15px;     /* Space from the right */\n    z-index: 1000;   /* Ensure it appears above other elements */\n    background-color: white; /* Background for visibility */\n    padding: 10px;   /* Padding around the filter */\n    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */\n    border-radius: 5px; /* Optional rounded corners */\n}\n\n.filter-select {\n    margin-left: 10px; /* Space between label and select */\n    padding: 5px;      /* Padding for the select */\n    font-size: 16px;   /* Font size for the select */\n}\n\n\n</style>"
+  },
+  {
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Client",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "article",
+   "fieldtype": "HTML",
+   "label": "article",
+   "options": "<div id=\"article-container\"></div>\n<style>\n#article-container {\ndisplay: flex;\n    flex-wrap: wrap;\n    gap: 16px;\n    /* padding: 1rem; */\n    padding-bottom: 120px;\n    justify-content: center;\n    font-family: system-ui, -apple-system, sans-serif;\n    /* max-width: 1200px; */\n    margin: 0 auto;\n}\n\n/* Article card styles */\n.article-card {\n    width: 100%;\n    max-width: 600px;\n    display: flex;\n    align-items: center;\n    background: white;\n    border-radius: 8px;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n    padding: 1rem;\n    gap: 1.5rem;\n    transition: box-shadow 0.3s ease;\n}\n\n.article-card:hover {\n    box-shadow: 0 4px 8px rgba(0,0,0,0.15);\n}\n\n/* Image styles */\n.item-image {\n    width: 120px;\n    height: 120px;\n    object-fit: cover;\n    border-radius: 6px;\n    flex-shrink: 0;\n}\n\n/* Content layout */\n.item-information {\n    flex: 1;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    gap: 1rem;\n}\n\n.item-details h3 {\n    margin: 0 0 0.5rem 0;\n    font-size: 1.25rem;\n    color: #333;\n}\n\n.item-details p {\n    margin: 0;\n    color: #666;\n}\n\n/* Quantity selector styles */\n.quantity-selector {\n    display: flex;\n    flex-direction: column;\n    gap: 0.75rem;\n    min-width: fit-content;\n}\n\n.pack-info {\n    background: #f8f9fa;\n    padding: 0.5rem 1rem;\n    border-radius: 4px;\n    text-align: center;\n    white-space: nowrap;\n}\n\n.pack-calculation {\n    color: #666;\n    font-size: 0.875rem;\n}\n\n.qty-controls {\n    display: flex;\n    align-items: center;\n    gap: 0.5rem;\n}\n\n.qty-input-container {\n    display: flex;\n    align-items: center;\n    gap: 0.25rem;\n    background: #f8f9fa;\n    padding: 0.25rem 0.5rem;\n    border-radius: 4px;\n    min-width: 100px;\n}\n\n.qty-input {\n    width: 60px;\n    border: none;\n    background: transparent;\n    font-size: 1rem;\n    text-align: right;\n    padding: 0.25rem;\n    outline: none;\n    -moz-appearance: textfield;\n}\n\n.qty-input::-webkit-inner-spin-button,\n.qty-input::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.qty-label {\n    color: #666;\n    font-size: 0.875rem;\n}\n\n.decrease-btn,\n.increase-btn {\n    width: 32px;\n    height: 32px;\n    border: none;\n    background: #f0f0f0;\n    border-radius: 4px;\n    cursor: pointer;\n    font-size: 1.25rem;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: background-color 0.2s ease;\n}\n\n.decrease-btn:hover,\n.increase-btn:hover {\n    background: #e0e0e0;\n}\n\n/* Mobile responsive adjustments */\n@media (max-width: 768px) {\n    .article-card {\n        padding: 0.75rem;\n        gap: 1rem;\n    }\n\n    .item-image {\n        width: 80px;\n        height:80px;\n     \n    }\n\n    .item-details h3 {\n        font-size: 1rem;\n    }\n\n    .item-details p {\n        font-size: 0.875rem;\n    }\n\n    .pack-info {\n        padding: 0.25rem 0.5rem;\n        font-size: 0.875rem;\n    }\n\n    .qty-input-container {\n        min-width: 80px;\n    }\n\n    .qty-input {\n        width: 40px;\n        font-size: 0.875rem;\n    }\n\n    .decrease-btn,\n    .increase-btn {\n        width: 28px;\n        height: 28px;\n        font-size: 1rem;\n    }\n}\n</style>\n"
+  },
+  {
+   "fieldname": "order_button",
+   "fieldtype": "HTML",
+   "label": "order_button",
+   "options": "<button id=\"create-order\" class=\"order-button\">Create Order</button>\n<style> \n.order-button {\n   background-color: #28a745;\n    color: white;\n    border: none;\n    padding: 14px 22px;\n    border-radius: 4px;\n    font-size: 24px;\n    /* cursor: pointer; */\n    width: calc(100% - 30px);\n    position: fixed;\n    bottom: 20px;\n    left: 15px;\n    z-index: 1000;\n}\n\n.order-button:hover {\n    background-color: #218838;\n}\n</style>\n"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-04 10:43:42.785874",
+ "modified_by": "Administrator",
+ "module": "Kb Distribution",
+ "name": "Pre-Commande",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

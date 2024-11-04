@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2024-10-29 22:17:25.077143",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "client",
+  "raison_du_rapport",
+  "note_suppl\u00e9mentaire"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Client",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "raison_du_rapport",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Raison du Rapport ",
+   "options": "Raison Rapport de Paiement",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "note_suppl\u00e9mentaire",
+   "fieldtype": "Long Text",
+   "label": "Note Suppl\u00e9mentaire"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-04 10:44:06.445271",
+ "modified_by": "Administrator",
+ "module": "Kb Distribution",
+ "name": "Rapport Paiement",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

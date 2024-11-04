@@ -242,3 +242,76 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+# my_customizations/my_customizations/hooks.py
+
+
+# Fixtures - this will export all your customizations
+fixtures = [
+    # Custom DocTypes
+    "DocType",
+    
+    # Print Formats
+    {
+        "doctype": "Print Format",
+        "filters": [
+            ["standard", "=", "No"]
+        ]
+    },
+    
+    # Custom Fields
+    {
+        "doctype": "Custom Field"
+    },
+    
+    # Client Scripts
+    {
+        "doctype": "Client Script"
+    },
+    
+    # Server Scripts
+    {
+        "doctype": "Server Script"
+    },
+    
+    # Workspaces
+    {
+        "doctype": "Workspace"
+    },
+    
+    # Custom DocPerm
+    {
+        "doctype": "Custom DocPerm"
+    },
+    
+    # Property Setter
+    {
+        "doctype": "Property Setter"
+    },
+    
+    # Report
+    {
+        "doctype": "Report",
+        "filters": [
+            ["is_standard", "=", "No"]
+        ]
+    },
+    
+    # Notification
+    {
+        "doctype": "Notification"
+    },
+    
+    # Workflow
+    "Workflow",
+    "Workflow State",
+    "Workflow Action"
+]
+
+# Include js/css files
+app_include_js = [
+    "/assets/my_customizations/js/my_customizations.js"
+]
+
+app_include_css = [
+    "/assets/my_customizations/css/my_customizations.css"
+]

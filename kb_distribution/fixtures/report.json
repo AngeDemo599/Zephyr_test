@@ -1,0 +1,100 @@
+[
+ {
+  "add_total_row": 1,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": null,
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "from date",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Ventes par Commercial",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "to date",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Ventes par Commercial",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "sales_user",
+    "fieldtype": "Link",
+    "label": "sales_user",
+    "mandatory": 0,
+    "options": "user",
+    "parent": "Ventes par Commercial",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2024-10-29 23:22:31.438340",
+  "module": "Selling",
+  "name": "Ventes par Commercial",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Sales Order",
+  "reference_report": null,
+  "report_name": "Ventes par Commercial",
+  "report_script": "def execute(filters=None):\r\n    if not filters:\r\n        filters = {}\r\n    \r\n    columns = [\r\n        {\"label\": \"Commercial\", \"fieldname\": \"sales_user\", \"fieldtype\": \"Link\", \"options\": \"User\", \"width\": 150},\r\n        {\"label\": \"Nom Commercial\", \"fieldname\": \"sales_person_name\", \"fieldtype\": \"Data\", \"width\": 150},\r\n        {\"label\": \"Code Article\", \"fieldname\": \"item_code\", \"fieldtype\": \"Link\", \"options\": \"Item\", \"width\": 120},\r\n        {\"label\": \"Nom Article\", \"fieldname\": \"item_name\", \"fieldtype\": \"Data\", \"width\": 200},\r\n        {\"label\": \"Qté Vendue\", \"fieldname\": \"qty_sold\", \"fieldtype\": \"Float\", \"width\": 100},\r\n        {\"label\": \"Total HT\", \"fieldname\": \"amount\", \"fieldtype\": \"Currency\", \"width\": 120},\r\n        {\"label\": \"Prix Revient\", \"fieldname\": \"valuation_rate\", \"fieldtype\": \"Currency\", \"width\": 120},\r\n        {\"label\": \"Marge Brute\", \"fieldname\": \"gross_margin\", \"fieldtype\": \"Currency\", \"width\": 120},\r\n        {\"label\": \"% Marge\", \"fieldname\": \"margin_percent\", \"fieldtype\": \"Percent\", \"width\": 80}\r\n    ]\r\n\r\n    # Construct conditions based on filters\r\n    conditions = []\r\n    if filters.get(\"from_date\"):\r\n        conditions.append(\"so.transaction_date >= %(from_date)s\")\r\n    if filters.get(\"to_date\"):\r\n        conditions.append(\"so.transaction_date <= %(to_date)s\")\r\n    if filters.get(\"sales_user\"):\r\n        conditions.append(\"so.owner = %(sales_user)s\")\r\n    \r\n    # Combine conditions\r\n    where_clause = f\" AND {' AND '.join(conditions)}\" if conditions else \"\"\r\n\r\n    # SQL query to fetch data\r\n    query = f\"\"\"\r\n        SELECT \r\n            so.owner as sales_user,\r\n            u.full_name as sales_person_name,\r\n            soi.item_code,\r\n            soi.item_name,\r\n            SUM(soi.qty) as qty_sold,\r\n            SUM(soi.base_amount) as amount,\r\n            i.valuation_rate\r\n        FROM \r\n            `tabSales Order` so\r\n        JOIN \r\n            `tabSales Order Item` soi ON so.name = soi.parent\r\n        LEFT JOIN \r\n            `tabItem` i ON soi.item_code = i.name\r\n        LEFT JOIN\r\n            `tabUser` u ON so.owner = u.name\r\n        WHERE \r\n            so.docstatus = 1\r\n            {where_clause}\r\n        GROUP BY \r\n            so.owner, soi.item_code\r\n    \"\"\"\r\n\r\n    # Execute the SQL query\r\n    data = frappe.db.sql(query, filters, as_dict=1)\r\n\r\n    # Calculate margins\r\n    for row in data:\r\n        total_cost = (row.qty_sold or 0) * (row.valuation_rate or 0)\r\n        row.gross_margin = (row.amount or 0) - total_cost\r\n        row.margin_percent = (row.gross_margin / row.amount * 100) if row.amount else 0\r\n\r\n    return columns, data\r\n\r\n    \r\nexecute();",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Ventes par Commercial",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Ventes par Commercial",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   },
+   {
+    "parent": "Ventes par Commercial",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Ventes par Commercial",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Ventes par Commercial",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Ventes par Commercial",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Pré-Vendeur"
+   }
+  ],
+  "timeout": 0
+ }
+]
